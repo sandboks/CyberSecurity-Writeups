@@ -14,7 +14,7 @@ We do have our own login credentials, and access to our own email to complete ou
 
 The login process involves the main login page (/login), and a 2nd page (/login2) where you enter the 2FA code emailed to you. You're then redirected to your account page.
 
-❌ We can't access Carlos' account by simply changing the parameters in the URL. (eg web-security-academy.net/my-account?id=carlos) No IDOR vulnerability here.
+We can't access Carlos' account by simply changing the parameters in the URL. (eg web-security-academy.net/my-account?id=carlos) No IDOR vulnerability here.
 
 Since we don't know his password, the only real way forward is exploiting the 2FA mechanism.
 
@@ -24,9 +24,9 @@ Interestingly, the /login POST Response sets two cookies: A session token, and t
 
 ![incorrect code](media/3.png)
 
-❌ This doesn't let us login. It seems our own 2FA code doesn't work for Carlos' account. 
+This doesn't let us login. It seems our own 2FA code doesn't work for Carlos' account. 
 
-💡 There is good news, though. It seems that this method of modifying the cookie will let us attempt to log into Carlos' account by guessing the 2FA code, even without knowing what his password is.
+On the plus side, it seems that this method of modifying the cookie will let us attempt to log into Carlos' account by guessing the 2FA code, even without knowing what his password is.
 
 The problem is, we don't know if there even is a 2FA code for Carlos. We won't be able to brute force it if a code hasn't been generated yet.
 
@@ -36,11 +36,11 @@ We're able to observe that the 2FA email is triggered by the GET /login2 Request
 
 Changing the value of "verify" in the Repeater to junk will result in a status code 500 error. Changing it to "carlos" results in status code 200. This is a username enumeration vulnerability, even though we already know carlos' account exists. 
 
-💡 In theory, this "carlos" /login2 Request SHOULD trigger a 2FA code for their account. We can't know if this actually works or not without peeking behind the scenes, but we have to make an educated guess and hope for the best. The status code 200, same as our own login triggering the 2FA code, seems to indicate it will work. 
+In theory, this "carlos" /login2 Request SHOULD trigger a 2FA code for their account. We can't know if this actually works or not without peeking behind the scenes, but we have to make an educated guess and hope for the best. The status code 200, same as our own login triggering the 2FA code, seems to indicate it will work. 
 
 ![2fa code patterns](media/5.png)
 
-💡 As an aside, the 4-digit 2FA codes appear to always start with a 0 or a 1. Out of 9 codes, 7/9 started with a zero and only 2/9 started with a one. 
+As an aside, the 4-digit 2FA codes appear to always start with a 0 or a 1. Out of 9 codes, 7/9 started with a zero and only 2/9 started with a one. 
 
 So, we now have:
 - a way to trigger the 2FA code
@@ -60,11 +60,11 @@ The free Community version of Burp Suite is slow. Like, REALLY slow.
 
 ![burp suite slow](media/6.png)
 
-It finished checking 436/10000 codes, 3.7% total, in 1 hour, 2 minutes and 35 seconds. At this rate, it's going to take 28 hours and 14 minutes to finish checking all the possible codes! 💀
+It finished checking 436/10000 codes, 4.36% total, in 1 hour, 2 minutes and 35 seconds. At this rate, it's going to take about 24 hours to finish checking all the possible codes! 💀
 
-I ain't got time for that! But also, I have no idea how to do any of this without using Burp Suite...
+It would've been completely impractical to try to finish the lab this way. But also, I had no idea how to do any of this without using Burp Suite.
 
-... So I Googled a bunch of networking stuff, and realised that I can create a program to do the exact same thing Burp Suite is doing in Python. Except my program won't be artificially throttled. Let's do that instead!
+... So I Googled some networking methods, and realised that I can create a program to do the exact same thing Burp Suite is doing in Python. Except my program won't be artificially throttled. Let's do that instead!
 
 I've never written anything like this before, but let's give it a shot!
 
@@ -86,7 +86,7 @@ The initial version was single threaded, and would take at most 40 minutes to co
 
 ![multi threaded cracking](media/8.jpg)
 
-I then implemented multithreading, which reduced the time to about 2 minutes. Compared to the Burp Suite estimate, that's roughly **847 times faster**. 😁
+I then implemented multithreading, which reduced the time to about 2 minutes. Compared to the Burp Suite estimate, that's roughly **717 times faster**. 
 
 The program also has a lot of UI user-friendliness, error checking, and visual information. It prints the progress out visually, so you get a lot of feedback while it's running. It's completely superfluous, but I love that stuff!
 
