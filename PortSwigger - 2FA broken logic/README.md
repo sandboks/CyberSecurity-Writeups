@@ -85,7 +85,7 @@ The initial version was single threaded, and would take at most 40 minutes to co
 
 ![multi threaded cracking](media/8.jpg)
 
-I then implemented multithreading, which reduced the time to about 2 minutes. Compared the to Burp Suite estimate, that's roughly **847 times faster**. 😁
+I then implemented multithreading, which reduced the time to about 2 minutes. Compared to the Burp Suite estimate, that's roughly **847 times faster**. 😁
 
 The program also has a lot of UI user-friendliness, error checking, and visual information. It prints the progress out visually, so you get a lot of feedback while it's running. It's completely superfluous, but I love that stuff!
 
