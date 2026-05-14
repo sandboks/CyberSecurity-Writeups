@@ -1,6 +1,5 @@
 # Solution: PortSwigger Lab: 2FA Broken Logic
-PortSwigger Web Security Academy - Authentication Vulnerabilities ([link](https://portswigger.net/web-security/learning-paths/authentication-vulnerabilities/vulnerabilities-in-multi-factor-authentication/authentication/multi-factor/lab-2fa-broken-logic#))
-
+PortSwigger Web Security Academy - Authentication Vulnerabilities ([link](https://portswigger.net/web-security/learning-paths/authentication-vulnerabilities/vulnerabilities-in-multi-factor-authentication/authentication/multi-factor/lab-2fa-broken-logic#))  
 Difficulty: PRACTITIONER
 
 ## OVERVIEW
