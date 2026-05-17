@@ -6,7 +6,7 @@ import os
 
 # if running the script repeatedly, hard code the URL here for convenience
 # otherwise, you'll need to provide the URL in the terminal when running the program
-baseWebsiteUrl = "https://0ad90050040cb3e680fe7199001c004e.web-security-academy.net"
+baseWebsiteUrl = ""
 
 getLoginPageUrl = lambda: baseWebsiteUrl + "/login"
 getAccountPageUrl = lambda: baseWebsiteUrl + f"/my-account?id={targetUsername}"
